@@ -13,26 +13,16 @@ from LCD1602 import CharLCD1602
 lcd1602 = CharLCD1602()
 
 
-def get_cpu_temp():     # get CPU temperature from file "/sys/class/thermal/thermal_zone0/temp"
-    tmp = open('/sys/class/thermal/thermal_zone0/temp')
-    cpu = tmp.read()
-    tmp.close()
-    return '{:.2f}'.format(float(cpu)/1000) + ' C '
-
-
-def get_time_now():     # get system time
-    return datetime.now().strftime('    %H:%M:%S')
-
-
 def loop():
     lcd1602.init_lcd()
     print('LCD1602 is working ...')
+    count = 0
     while (True):
         lcd1602.clear()
-        # display CPU temperature
-        lcd1602.write(0, 0, 'CPU: ' + get_cpu_temp())
-        lcd1602.write(0, 1, get_time_now())   # display the time
+        lcd1602.write(0, 0, 'Hello, World!')
+        lcd1602.write(0, 1, 'Count: ' + str(count))   # display the time
         sleep(1)
+        count += 1
 
 
 def destroy():
