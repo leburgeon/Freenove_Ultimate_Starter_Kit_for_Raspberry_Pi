@@ -9,7 +9,8 @@ class CharLCD1602(object):
         # Note you need to change the bus number to 0 if running on a revision 1 Raspberry Pi.
         self.bus = smbus.SMBus(1)
         self.BLEN = 0  # turn on/off background light
-        self.PCF8574_address = 0x27  # UPDATED: Matches your screen's specific factory address
+        # UPDATED: Matches your new screen's address (0x27)
+        self.PCF8574_address = 0x27
         self.PCF8574A_address = 0x3f  # I2C address of the PCF8574A chip.
         self.LCD_ADDR = self.PCF8574_address
 
@@ -63,17 +64,18 @@ class CharLCD1602(object):
     def init_lcd(self, addr=None, bl=1):
         i2c_list = self.i2c_scan()
         if addr is None:
-            if '22' in i2c_list:  # UPDATED: Directs auto-scan to find 22
+            if '27' in i2c_list:  # UPDATED: Directs auto-scan to find 27
                 self.LCD_ADDR = self.PCF8574_address
             elif '3f' in i2c_list:
                 self.LCD_ADDR = self.PCF8574A_address
             else:
-                raise IOError("I2C address 0x22 or 0x3f no found.")
+                # UPDATED string
+                raise IOError("I2C address 0x27 or 0x3f not found.")
         else:
             self.LCD_ADDR = addr
             if str(hex(addr)).strip('0x') not in i2c_list:
                 raise IOError(
-                    f"I2C address {str(hex(addr))} or 0x3f no found.")
+                    f"I2C address {str(hex(addr))} or 0x3f not found.")
         self.BLEN = bl
         try:
             self.send_command(0x33)  # Must initialize to 8-line mode at first
@@ -85,7 +87,6 @@ class CharLCD1602(object):
             self.send_command(0x0C)  # Enable display without cursor
             time.sleep(0.005)
             self.send_command(0x01)  # Clear Screen
-            # FIXED: Added the missing dot here
             self.bus.write_byte(self.LCD_ADDR, 0x08)
         except:
             return False
@@ -96,7 +97,6 @@ class CharLCD1602(object):
         self.send_command(0x01)  # Clear Screen
 
     def openlight(self):  # Enable the backlight
-        # FIXED: Changed hardcoded 0x27 to dynamic address
         self.bus.write_byte(self.LCD_ADDR, 0x08)
         self.bus.close()
 
