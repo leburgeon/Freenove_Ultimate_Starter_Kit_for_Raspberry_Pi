@@ -25,7 +25,7 @@ def loop():
     while (True):
         lcd1602.write(0, 0, 'Hello, Oliver!')
         lcd1602.write(0, 1, 'Time: ' + get_time())   # display the time
-        sleep(1)
+        sleep(0.2)
         count += 1
 
 
