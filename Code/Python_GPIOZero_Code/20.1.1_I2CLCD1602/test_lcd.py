@@ -23,6 +23,7 @@ def loop():
     print('LCD1602 is working ...')
     while (True):
         time = get_time()
+        old_time = ''
         if time != old_time:
             old_time = time
             lcd1602.write(0, 0, 'Hello, Oliver!')
