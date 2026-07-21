@@ -3,7 +3,7 @@ import time
 
 # Force connection to I2C bus 1 and address 0x22
 bus = smbus.SMBus(1)
-ADDR = 0x22
+ADDR = 0x27
 
 
 def send_byte(data, mode):

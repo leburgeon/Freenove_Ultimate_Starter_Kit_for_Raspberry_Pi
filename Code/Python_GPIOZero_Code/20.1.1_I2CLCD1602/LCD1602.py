@@ -9,7 +9,7 @@ class CharLCD1602(object):
         # Note you need to change the bus number to 0 if running on a revision 1 Raspberry Pi.
         self.bus = smbus.SMBus(1)
         self.BLEN = 0  # turn on/off background light
-        self.PCF8574_address = 0x22  # UPDATED: Matches your screen's specific factory address
+        self.PCF8574_address = 0x27  # UPDATED: Matches your screen's specific factory address
         self.PCF8574A_address = 0x3f  # I2C address of the PCF8574A chip.
         self.LCD_ADDR = self.PCF8574_address
 
