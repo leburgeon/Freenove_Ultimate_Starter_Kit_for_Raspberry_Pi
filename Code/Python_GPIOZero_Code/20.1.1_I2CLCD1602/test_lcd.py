@@ -21,12 +21,12 @@ def get_time():
 def loop():
     lcd1602.init_lcd()
     print('LCD1602 is working ...')
-    count = 0
     while (True):
-        lcd1602.write(0, 0, 'Hello, Oliver!')
-        lcd1602.write(0, 1, 'Time: ' + get_time())   # display the time
-        sleep(0.2)
-        count += 1
+        time = get_time()
+        if time != old_time:
+            old_time = time
+            lcd1602.write(0, 0, 'Hello, Oliver!')
+            lcd1602.write(0, 1, 'Time: ' + time)   # display the time
 
 
 def destroy():
