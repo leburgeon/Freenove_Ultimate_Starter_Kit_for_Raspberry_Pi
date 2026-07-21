@@ -26,7 +26,7 @@ def loop():
         old_time = ''
         if time != old_time:
             old_time = time
-            lcd1602.write(0, 0, 'Hello, Oliver!')
+            lcd1602.write(0, 0, 'Hello, Lewis!')
             lcd1602.write(0, 1, 'Time: ' + time)   # display the time
 
 
