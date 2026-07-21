@@ -13,6 +13,11 @@ from LCD1602 import CharLCD1602
 lcd1602 = CharLCD1602()
 
 
+def get_time():
+    now = datetime.now()
+    return now.strftime("%H:%M:%S")
+
+
 def loop():
     lcd1602.init_lcd()
     print('LCD1602 is working ...')
@@ -20,7 +25,7 @@ def loop():
     while (True):
         lcd1602.clear()
         lcd1602.write(0, 0, 'Hello, Oliver!')
-        lcd1602.write(0, 1, 'Count: ' + str(count))   # display the time
+        lcd1602.write(0, 1, 'Time: ' + get_time())   # display the time
         sleep(1)
         count += 1
 
