@@ -23,7 +23,6 @@ def loop():
     print('LCD1602 is working ...')
     count = 0
     while (True):
-        lcd1602.clear()
         lcd1602.write(0, 0, 'Hello, Oliver!')
         lcd1602.write(0, 1, 'Time: ' + get_time())   # display the time
         sleep(1)
